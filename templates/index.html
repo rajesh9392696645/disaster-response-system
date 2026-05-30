@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Disaster Prediction System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>🌍 Real-Time Disaster Prediction System</h1>
+
+        <p class="subtitle">
+            AI-Based Disaster Prediction and Emergency Response
+        </p>
+
+        <form method="POST" id="predictionForm">
+
+            <div class="input-group">
+                <label>Temperature (°C)</label>
+                <input
+                    type="number"
+                    name="temperature"
+                    placeholder="Enter temperature"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>Rainfall (mm)</label>
+                <input
+                    type="number"
+                    name="rainfall"
+                    placeholder="Enter rainfall"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>Humidity (%)</label>
+                <input
+                    type="number"
+                    name="humidity"
+                    placeholder="Enter humidity"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>Wind Speed (km/h)</label>
+                <input
+                    type="number"
+                    name="wind"
+                    placeholder="Enter wind speed"
+                    required>
+            </div>
+
+            <button type="submit">
+                Predict Disaster
+            </button>
+
+        </form>
+
+        {% if result %}
+
+        <div class="result-box">
+
+            <h2>Prediction Result</h2>
+
+            <div class="result-item">
+                <strong>Disaster Type:</strong>
+                {{ result.disaster }}
+            </div>
+
+            <div class="result-item">
+                <strong>Probability:</strong>
+                {{ result.probability }}%
+            </div>
+
+            <h3>Emergency Actions</h3>
+
+            <ul>
+                {% for action in result.actions %}
+                <li>{{ action }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
